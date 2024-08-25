@@ -5,4 +5,5 @@ const getAllContacts = async () => {
   return JSON.parse(data);
 };
 export default getAllContacts;
-console.log(await getAllContacts());
+// console.log(await getAllContacts());
+getAllContacts();
