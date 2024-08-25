@@ -1,4 +1,4 @@
-import { faker } from "@faker-js/faker";
+import { faker } from '@faker-js/faker';
 
 export const createFakeContact = () => ({
   id: faker.string.uuid(),
@@ -7,3 +7,5 @@ export const createFakeContact = () => ({
   email: faker.internet.email(),
   job: faker.person.jobTitle(),
 });
+
+export default createFakeContact;
