@@ -24,7 +24,19 @@ export const setupServer = () => {
   });
 
   app.get('/contacts/:id', async (reg, res) => {
-    console.log(reg.params);
+    const { id } = reg.params;
+    const data = await contactServises.getContactById(id);
+
+    if (!data) {
+      return res.status(404).json({
+        message: `Contact id=${id} not found`,
+      });
+    }
+    res.json({
+      status: 200,
+      message: `Successfully found contact with ${id} {contactId}!`,
+      data,
+    });
   });
 
   //routes
