@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import pino from 'pino-http';
 import { env } from './utils/env.js';
+import * as contactServises from './servises/contacts.js';
 
 export const setupServer = () => {
   const app = express();
@@ -13,6 +14,18 @@ export const setupServer = () => {
   app.use(logger);
   app.use(cors());
   app.use(express.json());
+  app.get('/contacts', async (reg, res) => {
+    const data = await contactServises.getAllContacts();
+    res.json({
+      status: 200,
+      message: 'Successfully found contacts!',
+      data,
+    });
+  });
+
+  app.get('/contacts/:id', async (reg, res) => {
+    console.log(reg.params);
+  });
 
   //routes
 
