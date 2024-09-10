@@ -24,8 +24,9 @@ export const setupServer = () => {
     });
   });
   app.use((error, res, reg, next) => {
-    res.status(500).json({
-      massege: error.massege,
+    const { status = 500, massege } = error;
+    res.status(status).json({
+      massege,
     });
   });
   const port = Number(env('PORT', 3000));
