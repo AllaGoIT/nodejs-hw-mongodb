@@ -58,5 +58,5 @@ export const delContactByIdController = async (reg, res, next) => {
     next(createHttpError(404, 'Contact not found'));
     return;
   }
-  res.status(204).send;
+  res.status(204).send();
 };
