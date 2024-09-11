@@ -24,3 +24,12 @@ export const getContactByIdController = async (reg, res) => {
     data,
   });
 };
+
+export const postNewContactController = async (reg, res) => {
+  const data = await contactServises.postNewContact(reg.body);
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully created a contact!',
+    data,
+  });
+};
