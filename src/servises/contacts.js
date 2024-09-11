@@ -17,3 +17,7 @@ export const patchNewContact = async (id, payload) => {
     new: true,
   });
 };
+
+export const deleteContactById = async (id) => {
+  return await contactCollection.findOneAndDelete({ _id: id });
+};

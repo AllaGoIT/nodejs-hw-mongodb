@@ -49,3 +49,14 @@ export const patchContactByIdController = async (reg, res, next) => {
     data,
   });
 };
+
+export const delContactByIdController = async (reg, res, next) => {
+  const { id } = reg.params;
+  const data = await contactServises.deleteContactById(id);
+
+  if (!data) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
+  }
+  res.status(204).send;
+};
