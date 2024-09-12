@@ -10,3 +10,11 @@ export const conactsShema = Joi.object({
     .valid(...personelData)
     .required(),
 });
+
+export const conactsPacthShema = Joi.object({
+  name: Joi.string(),
+  phonenumber: Joi.string(),
+  email: Joi.string(),
+  isFavorite: Joi.boolean(),
+  contantType: Joi.string().valid(...personelData),
+});
