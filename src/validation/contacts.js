@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import { personelData } from '../constants/contacts.js';
 
-export const conactsShema = Joi.object({
+export const contactsShema = Joi.object({
   name: Joi.string().required(),
   phonenumber: Joi.string().required(),
   email: Joi.string(),
@@ -11,7 +11,7 @@ export const conactsShema = Joi.object({
     .required(),
 });
 
-export const conactsPacthShema = Joi.object({
+export const contactsPatchShema = Joi.object({
   name: Joi.string(),
   phonenumber: Joi.string(),
   email: Joi.string(),

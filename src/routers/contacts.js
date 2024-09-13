@@ -9,7 +9,7 @@ import {
 import ctrlWrapper from '../utils/ctrllWrapper.js';
 
 import validateBody from '../utils/validateBody.js';
-import { conactsShema } from '../validation/contacts.js';
+import { contactsShema } from '../validation/contacts.js';
 import { contactsPatchShema } from '../validation/contacts.js';
 
 const router = Router();
@@ -20,7 +20,7 @@ router.get('/:id', ctrlWrapper(getContactByIdController));
 
 router.post(
   '/',
-  validateBody(conactsShema),
+  validateBody(contactsShema),
   ctrlWrapper(postNewContactController),
 );
 
