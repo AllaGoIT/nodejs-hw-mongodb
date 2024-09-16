@@ -1,6 +1,5 @@
 import createHttpError from 'http-errors';
 import * as contactServises from '../servises/contacts.js';
-import { contactsShema } from '../validation/contacts.js';
 
 export const getAllContactsController = async (reg, res) => {
   const data = await contactServises.getAllContacts();
@@ -28,18 +27,12 @@ export const getContactByIdController = async (reg, res) => {
 };
 
 export const postNewContactController = async (reg, res) => {
-  try {
-    await contactsShema.validateAsync(reg.body, { abortEarly: false });
-    console.log('Validation success');
-  } catch (error) {
-    console.log(error.massage);
-  }
-  // const data = await contactServises.postNewContact(reg.body);
-  // res.status(201).json({
-  //   status: 201,
-  //   message: 'Successfully created a contact!',
-  //   data,
-  // });
+  const data = await contactServises.postNewContact(reg.body);
+  res.status(201).json({
+    status: 201,
+    message: 'Successfully created a contact!',
+    data,
+  });
 };
 
 export const patchContactByIdController = async (reg, res, next) => {
