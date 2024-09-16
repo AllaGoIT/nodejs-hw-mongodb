@@ -11,12 +11,13 @@ import ctrlWrapper from '../utils/ctrllWrapper.js';
 import validateBody from '../utils/validateBody.js';
 import { contactsShema } from '../validation/contacts.js';
 import { contactsPatchShema } from '../validation/contacts.js';
+import isValidId from '../middlewares/isValidId.js';
 
 const router = Router();
 
 router.get('/', ctrlWrapper(getAllContactsController));
 
-router.get('/:id', ctrlWrapper(getContactByIdController));
+router.get('/:id', isValidId, ctrlWrapper(getContactByIdController));
 
 router.post(
   '/',
@@ -26,10 +27,11 @@ router.post(
 
 router.patch(
   '/:id',
+  isValidId,
   validateBody(contactsPatchShema),
   ctrlWrapper(patchContactByIdController),
 );
 
-router.delete('/:id', ctrlWrapper(delContactByIdController));
+router.delete('/:id', isValidId, ctrlWrapper(delContactByIdController));
 
 export default router;
