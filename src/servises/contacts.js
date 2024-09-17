@@ -5,7 +5,7 @@ import { SORT_ORDER } from '../constants/index.js';
 export const getContacts = async ({
   perPage,
   page,
-  sortBy = 'name',
+  sortBy = '_id',
   sortOrder = SORT_ORDER[0],
 }) => {
   const skip = (page - 1) * perPage;
