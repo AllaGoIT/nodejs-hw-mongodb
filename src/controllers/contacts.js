@@ -1,12 +1,26 @@
 import createHttpError from 'http-errors';
 import * as contactServises from '../servises/contacts.js';
+import parsePaginationParams from '../utils/parsePaginationParams.js';
+import parseSortParams from '../utils/parseSortParams.js';
+import { sortFields } from '../db/models/Contact.js';
+import parseContactsFilterParamas from '../utils/filters/parseContactsFilterParams.js';
 
 export const getAllContactsController = async (reg, res) => {
-  const data = await contactServises.getAllContacts();
+  const { perPage, page } = parsePaginationParams(reg.query);
+  const { sortBy, sortQuery } = parseSortParams({ ...reg.query, sortFields });
+  const filter = parseContactsFilterParamas(reg.query);
+
+  const data = await contactServises.getContacts({
+    perPage,
+    page,
+    sortBy,
+    sortQuery,
+  });
   res.json({
     status: 200,
     message: 'Successfully found contacts!',
     data,
+    filter,
   });
 };
 
@@ -48,4 +62,15 @@ export const patchContactByIdController = async (reg, res, next) => {
     message: 'Successfully patched a contact!',
     data,
   });
+};
+
+export const delContactByIdController = async (reg, res, next) => {
+  const { id } = reg.params;
+  const data = await contactServises.deleteContactById(id);
+
+  if (!data) {
+    next(createHttpError(404, 'Contact not found'));
+    return;
+  }
+  res.status(204).send();
 };
