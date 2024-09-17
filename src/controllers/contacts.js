@@ -6,7 +6,7 @@ import { sortFields } from '../db/models/Contact.js';
 
 export const getAllContactsController = async (reg, res) => {
   const { perPage, page } = parsePaginationParams(reg.query);
-  const { sortBy, sortQuery } = parseSortParams(...reg.query, sortFields);
+  const { sortBy, sortQuery } = parseSortParams({ ...reg.query, sortFields });
   // console.log(page, perPage);
   const data = await contactServises.getContacts({
     perPage,
