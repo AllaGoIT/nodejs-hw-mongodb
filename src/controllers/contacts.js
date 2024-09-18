@@ -15,6 +15,7 @@ export const getAllContactsController = async (reg, res) => {
     page,
     sortBy,
     sortQuery,
+    filter,
   });
   res.json({
     status: 200,
