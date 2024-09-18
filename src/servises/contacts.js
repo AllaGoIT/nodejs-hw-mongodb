@@ -15,7 +15,7 @@ export const getContacts = async ({
     await contactsQuery.where('contactType').equals(filter.type);
   }
   if (filter.isFavourite) {
-    contactsQuery.where('isFavourite').equals(filter.value);
+    contactsQuery.where('isFavourite').equals(filter.type);
   }
   const contacts = await contactsQuery
     .skip(skip)
