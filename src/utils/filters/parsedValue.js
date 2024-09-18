@@ -7,6 +7,6 @@ export const parsedContactType = (type) => {
 export const parsedIsFavourite = (type) => {
   const favourite = typeof type === 'boolean';
   if (!favourite) return;
-  const isFavourite = (type) => ['true'].includes(type);
+  const isFavourite = (type) => ['true', 'false'].includes(type);
   if (isFavourite(type)) return type;
 };
