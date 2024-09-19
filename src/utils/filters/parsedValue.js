@@ -1,5 +1,8 @@
 export const parsedContactType = (type) => {
-  const contactType = typeof value === 'string';
+  // if (!['personal'].includes(type)) return;
+  // return type === 'personal' ? true : false;
+  const contactType = typeof type === 'string';
+  // console.log(contactType);
   if (!contactType) return;
   const isType = (type) => ['personel', 'female', 'other'].includes(type);
   if (isType(type)) return type;
