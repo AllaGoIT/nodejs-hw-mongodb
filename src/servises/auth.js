@@ -1,7 +1,7 @@
 import userCollection from '../db/models/User.js';
 
 export const signup = async (payload) => {
-  const { password, ...data } = await userCollection.create(payload);
-
-  return data;
+  const data = await userCollection.create(payload);
+  delete data._doc.password;
+  return data._doc;
 };
