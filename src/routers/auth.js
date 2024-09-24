@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import ctrWrapper from '../utils/ctrllWrapper.js';
 import validateBody from '../utils/validateBody.js';
-import { userSignupSchema, userSinginShema } from '../validation/users.js';
+import { userSignupSchema, userSigninShema } from '../validation/users.js';
 import * as authController from '../controllers/auth.js';
 
 const authRouter = Router();
@@ -14,7 +14,7 @@ authRouter.post(
 
 authRouter.post(
   '/signin',
-  validateBody(userSinginShema),
-  ctrWrapper(authController.userSinginShema),
+  validateBody(userSigninShema),
+  ctrWrapper(authController.userSigninShema),
 );
 export default authRouter;
