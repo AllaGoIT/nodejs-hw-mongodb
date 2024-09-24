@@ -15,6 +15,6 @@ authRouter.post(
 authRouter.post(
   '/signin',
   validateBody(userSigninShema),
-  ctrWrapper(authController.userSigninShema),
+  ctrWrapper(authController.singInController),
 );
 export default authRouter;
