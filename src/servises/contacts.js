@@ -11,13 +11,13 @@ export const getContacts = async ({
 }) => {
   const skip = (page - 1) * perPage;
   const contactsQuery = contactCollection.find();
-  console.log(filter);
+
   if (filter.contactType) {
-    console.log(filter.contactType);
     contactsQuery.where('contactType').equals(filter.contactType);
   }
   if (filter.isFavourite) {
-    contactsQuery.where('isFavourite').equals(filter.isFavouritee);
+    console.log(filter.isFavourite);
+    contactsQuery.where('isFavourite').equals(filter.isFavourite);
   }
   const contacts = await contactsQuery
     .skip(skip)
