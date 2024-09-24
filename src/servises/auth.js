@@ -51,3 +51,8 @@ export const signin = async (payload) => {
   });
   return userSession;
 };
+
+export const findSessionByAccessToken = (accessToken) =>
+  SessionCollection.findOne({ accessToken });
+
+export const findUser = (filter) => SessionCollection.findOne(filter);
