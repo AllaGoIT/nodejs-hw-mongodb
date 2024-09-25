@@ -8,7 +8,9 @@ const authenticate = async (reg, res, next) => {
     return next(createHttpError(401, 'Authorization header is not found'));
   }
 
-  const [bearer, token] = authorization.split(' ');
+  const [bearer, token] = authorization.split('');
+
+  console.log(bearer);
 
   if (bearer !== 'Bearer') {
     return next(
@@ -16,6 +18,8 @@ const authenticate = async (reg, res, next) => {
     );
   }
   const session = await authSession.findSessionByAccessToken(token);
+
+  console.log(session);
 
   if (!session) {
     return next(createHttpError(401, 'Session is not found'));
@@ -27,6 +31,7 @@ const authenticate = async (reg, res, next) => {
   if (!user) {
     return next(createHttpError(401, 'User is not found'));
   }
+  reg.user = user;
   next();
 };
 
