@@ -8,14 +8,16 @@ import parseContactsFilterParamas from '../utils/filters/parseContactsFilterPara
 export const getAllContactsController = async (reg, res) => {
   const { perPage, page } = parsePaginationParams(reg.query);
   const { sortBy, sortQuery } = parseSortParams({ ...reg.query, sortFields });
+
   const filter = parseContactsFilterParamas(reg.query);
+  const { _id: userId } = reg.user;
 
   const data = await contactServises.getContacts({
     perPage,
     page,
     sortBy,
     sortQuery,
-    filter,
+    filter: { ...filter, userId },
   });
   res.json({
     status: 200,
