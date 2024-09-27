@@ -19,8 +19,8 @@ export const setupSession = (res, session) => {
   });
 };
 
-export const signUpController = async (reg, res) => {
-  const newUser = await authServices.signup(reg.body);
+export const registerController = async (reg, res) => {
+  const newUser = await authServices.register(reg.body);
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
@@ -28,8 +28,8 @@ export const signUpController = async (reg, res) => {
   });
 };
 
-export const singInController = async (reg, res) => {
-  const session = await authServices.signin(reg.body);
+export const loginController = async (reg, res) => {
+  const session = await authServices.login(reg.body);
   setupSession(res, session);
   res.json({
     status: 200,
