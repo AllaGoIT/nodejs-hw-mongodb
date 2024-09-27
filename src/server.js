@@ -13,9 +13,10 @@ export const setupServer = () => {
   app.use(loggerHandler);
   app.use(cors());
   app.use(express.json());
+  app.use(cookieParser());
+
   app.use('/contacts', router);
   app.use('/auth', authRouter);
-  app.use(cookieParser());
 
   //routes
 
