@@ -90,4 +90,4 @@ export const signout = async (sessionId) => {
   await SessionCollection.deleteOne({ _id: sessionId });
 };
 
-export const findUser = (filter) => SessionCollection.findOne(filter);
+export const findUser = (filter) => userCollection.findOne(filter);
