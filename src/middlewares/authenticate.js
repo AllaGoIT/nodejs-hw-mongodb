@@ -1,8 +1,9 @@
 import createHttpError from 'http-errors';
-import * as authSession from '../servises/auth.js';
+import * as authServices from '../servises/auth.js';
 
 const authenticate = async (reg, res, next) => {
   const authorization = reg.get('Authorization');
+  console.log(authorization);
 
   if (!authorization) {
     return next(createHttpError(401, 'Authorization header is not found'));
@@ -14,7 +15,7 @@ const authenticate = async (reg, res, next) => {
       createHttpError(401, 'Authorization header must have Bearer type'),
     );
   }
-  const session = await authSession.findSessionByAccessToken(token);
+  const session = await authServices.findSessionByAccessToken(token);
 
   if (!session) {
     return next(createHttpError(401, 'Session is not found'));
@@ -22,8 +23,7 @@ const authenticate = async (reg, res, next) => {
   if (new Date() > session.accessTokenValidUntil) {
     return next(createHttpError(401, 'Access Token is expired'));
   }
-  const user = await authSession.findUser({ _id: session.userId });
-  console.log(user);
+  const user = await authServices.findUser({ _id: session.userId });
   if (!user) {
     return next(createHttpError(401, 'User is not found'));
   }
