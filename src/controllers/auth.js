@@ -1,7 +1,7 @@
 import * as authServices from '../servises/auth.js';
 
 export const setupSession = (res, session) => {
-  res.cookie('session', session.refreshToken, {
+  res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
     expire: new Date(Date() + session.refreshTokenValidUntil),
   });
@@ -39,12 +39,14 @@ export const singInController = async (reg, res) => {
     },
   });
 };
+
 export const refreshController = async (reg, res) => {
   const { refreshToken, sessionId } = reg.cookies;
   const session = await authServices.refreshSession({
     refreshToken,
     sessionId,
   });
+  console.log(session);
   setupSession(res, session);
   res.json({
     status: 200,
@@ -53,4 +55,15 @@ export const refreshController = async (reg, res) => {
       accessToken: session.accessToken,
     },
   });
+};
+
+export const singoutController = async (reg, res) => {
+  const { sessionId } = reg.cookies;
+  if (sessionId) {
+    await authServices.signout(sessionId);
+
+    res.clearCookie('sessionId');
+    res.clearCookie('refreshToken');
+    res.status(204).send();
+  }
 };
