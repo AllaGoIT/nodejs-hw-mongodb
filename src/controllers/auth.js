@@ -57,7 +57,7 @@ export const refreshController = async (reg, res) => {
   });
 };
 
-export const singoutController = async (reg, res) => {
+export const signoutController = async (reg, res) => {
   const { sessionId } = reg.cookies;
   if (sessionId) {
     await authServices.signout(sessionId);
