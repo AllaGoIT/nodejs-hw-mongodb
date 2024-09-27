@@ -1,12 +1,10 @@
 export const parsedContactType = (type) => {
-  const contactType = typeof value === 'string';
+  const contactType = typeof type === 'string';
   if (!contactType) return;
-  const isType = (type) => ['personel', 'female', 'other'].includes(type);
+  const isType = (type) => ['personal', 'home'].includes(type);
   if (isType(type)) return type;
 };
 export const parsedIsFavourite = (type) => {
-  const favourite = typeof type === 'boolean';
-  if (!favourite) return;
-  const isFavourite = (type) => ['true', 'false'].includes(type);
-  if (isFavourite(type)) return type;
+  if (!['true', 'false'].includes(type)) return;
+  return type === 'true' ? true : false;
 };

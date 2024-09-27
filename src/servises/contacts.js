@@ -7,15 +7,21 @@ export const getContacts = async ({
   page,
   sortBy = '_id',
   sortOrder = SORT_ORDER[0],
-  filter = {},
+  filter = [],
 }) => {
   const skip = (page - 1) * perPage;
   const contactsQuery = contactCollection.find();
+
   if (filter.contactType) {
-    await contactsQuery.where('contactType').equals(filter.type);
+    contactsQuery.where('contactType').equals(filter.contactType);
   }
   if (filter.isFavourite) {
-    contactsQuery.where('isFavourite').equals(filter.type);
+    console.log(filter.isFavourite);
+    contactsQuery.where('isFavourite').equals(filter.isFavourite);
+  }
+
+  if (filter.userId) {
+    contactsQuery.where('userId').equals(filter.userId);
   }
   const contacts = await contactsQuery
     .skip(skip)
@@ -36,8 +42,8 @@ export const getContacts = async ({
   };
 };
 
-export const getContactById = async (id) => {
-  return await contactCollection.findById(id);
+export const getContact = async (filter) => {
+  return await contactCollection.findById(filter);
 };
 
 export const postNewContact = async (payload) => {
