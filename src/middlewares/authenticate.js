@@ -8,7 +8,7 @@ const authenticate = async (reg, res, next) => {
     return next(createHttpError(401, 'Authorization header is not found'));
   }
   const [bearer, token] = authorization.split(' ');
-  console.log(token);
+  // console.log(token);
   if (bearer !== 'Bearer') {
     return next(
       createHttpError(401, 'Authorization header must have Bearer type'),
@@ -23,6 +23,7 @@ const authenticate = async (reg, res, next) => {
     return next(createHttpError(401, 'Access Token is expired'));
   }
   const user = await authSession.findUser({ _id: session.userId });
+  console.log(user);
   if (!user) {
     return next(createHttpError(401, 'User is not found'));
   }
