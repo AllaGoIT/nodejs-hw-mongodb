@@ -15,7 +15,7 @@ const authenticate = async (reg, res, next) => {
       createHttpError(401, 'Authorization header must have Bearer type'),
     );
   }
-  const session = authServices.findSessionByAccessToken(token);
+  const session = await authServices.findSessionByAccessToken(token);
 
   if (!session) {
     return next(createHttpError(401, 'Session is not found'));
@@ -23,7 +23,7 @@ const authenticate = async (reg, res, next) => {
   if (new Date() > session.accessTokenValidUntil) {
     return next(createHttpError(401, 'Access Token is expired'));
   }
-  const user = authServices.findUser({ _id: session.userId });
+  const user = await authServices.findUser({ _id: session.userId });
   if (!user) {
     return next(createHttpError(401, 'User is not found'));
   }
