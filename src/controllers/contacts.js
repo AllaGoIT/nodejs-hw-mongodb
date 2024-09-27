@@ -29,7 +29,8 @@ export const getAllContactsController = async (reg, res) => {
 
 export const getContactByIdController = async (reg, res) => {
   const { id } = reg.params;
-  const data = await contactServises.getContactById(id);
+  const { _id: userId } = reg.user;
+  const data = await contactServises.getContact({ id, userId });
 
   if (!data) {
     return res.status(404).json({
@@ -45,6 +46,7 @@ export const getContactByIdController = async (reg, res) => {
 
 export const postNewContactController = async (reg, res) => {
   const { _id: userId } = reg.user;
+
   const data = await contactServises.postNewContact({ ...reg.body, userId });
   res.status(201).json({
     status: 201,
@@ -55,7 +57,8 @@ export const postNewContactController = async (reg, res) => {
 
 export const patchContactByIdController = async (reg, res, next) => {
   const { id } = reg.params;
-  const data = await contactServises.patchNewContact(id, reg.body);
+  const { _id: userId } = reg.user;
+  const data = await contactServises.patchNewContact({ id, userId }, reg.body);
 
   if (!data) {
     next(createHttpError(404, 'Contact not found'));
@@ -70,7 +73,8 @@ export const patchContactByIdController = async (reg, res, next) => {
 
 export const delContactByIdController = async (reg, res, next) => {
   const { id } = reg.params;
-  const data = await contactServises.deleteContactById(id);
+  const { _id: userId } = reg.user;
+  const data = await contactServises.deleteContactById(id, userId);
 
   if (!data) {
     next(createHttpError(404, 'Contact not found'));

@@ -42,8 +42,8 @@ export const getContacts = async ({
   };
 };
 
-export const getContactById = async (id) => {
-  return await contactCollection.findById(id);
+export const getContact = async (filter) => {
+  return await contactCollection.findById(filter);
 };
 
 export const postNewContact = async (payload) => {
