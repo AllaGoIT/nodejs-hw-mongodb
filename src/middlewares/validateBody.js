@@ -13,4 +13,10 @@ export const validateBody = async (reg, res, next) => {
       createHttpError(500, 'Failed to send the email, please try again later.'),
     );
   }
+  const token = reg.resetToken;
+  const session = authServices.findSessionByAccessToken(token);
+
+  if (new Date() > session.accessTokenValidUntil) {
+    return next(createHttpError(401, 'Token is expired or invalid.'));
+  }
 };

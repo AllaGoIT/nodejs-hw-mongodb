@@ -5,6 +5,7 @@ import {
   userRegisterSchema,
   loginShema,
   requestResetEmailShema,
+  resetPasswordShema,
 } from '../validation/users.js';
 import * as authController from '../controllers/auth.js';
 
@@ -28,5 +29,10 @@ authRouter.post(
   '/send-reset-email',
   validateBody(requestResetEmailShema),
   ctrWrapper(authController.sendResetEmailController),
+);
+authRouter.post(
+  '/auth/reset-pwd',
+  validateBody(resetPasswordShema),
+  ctrWrapper(authController.resetPasswordController),
 );
 export default authRouter;
