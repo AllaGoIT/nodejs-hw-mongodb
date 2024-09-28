@@ -7,6 +7,10 @@ import jwt from 'jsonwebtoken';
 import { SMTP } from '../constants/users.js';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendemail.js';
+import handlebars from 'handlebars';
+import path from 'node:path';
+import fs from 'node:fs/promises';
+import { TEMPLATES_DIR } from '../constants/index.js';
 
 import {
   accessTokenLifeTime,
@@ -114,12 +118,25 @@ export const requestResetToken = async (email) => {
     },
   );
 
-  await sendEmail({
-    from: env(SMTP.SMTP_FROM),
-    to: email,
-    subject: 'Reset your password',
-    html: `<p>
-        Click <a href="${resetToken}"></a> to reset your password!
-      </p>`,
+  const resetPasswordTemplatePath = path.join(
+    TEMPLATES_DIR,
+    'reset-password-email.html',
+  );
+
+  const temlateSourse = (
+    await fs.readFile(resetPasswordTemplatePath)
+  ).toString();
+  const template = handlebars.compile(temlateSourse);
+
+  const html = template({
+    name: user.name,
+    link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken},`,
   });
-};
+
+await sendEmail({
+  from: env(SMTP.SMTP_FROM),
+  to: email,
+  subject: 'Reset your password',
+  html:
+});
+}
