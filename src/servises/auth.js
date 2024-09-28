@@ -133,10 +133,10 @@ export const requestResetToken = async (email) => {
     link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken},`,
   });
 
-await sendEmail({
-  from: env(SMTP.SMTP_FROM),
-  to: email,
-  subject: 'Reset your password',
-  html:
-});
-}
+  await sendEmail({
+    from: env(SMTP.SMTP_FROM),
+    to: email,
+    subject: 'Reset your password',
+    html,
+  });
+};
