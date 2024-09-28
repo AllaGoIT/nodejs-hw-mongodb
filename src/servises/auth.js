@@ -3,6 +3,10 @@ import userCollection from '../db/models/User.js';
 import SessionCollection from '../db/models/Session.js';
 import bcrypt from 'bcrypt';
 import { randomBytes } from 'crypto';
+import jwt from 'jsonwebtoken';
+import { SMTP } from '../constants/users.js';
+import { env } from '../utils/env.js';
+import { sendEmail } from '../utils/sendemail.js';
 
 import {
   accessTokenLifeTime,
@@ -91,3 +95,31 @@ export const signout = async (sessionId) => {
 };
 
 export const findUser = (filter) => userCollection.findOne(filter);
+
+export const requestResetToken = async (email) => {
+  const user = await userCollection.findOne({ email });
+
+  if (!user) {
+    throw createHttpError(404, 'User not found');
+  }
+
+  const resetToken = jwt.sign(
+    {
+      sub: user._id,
+      email,
+    },
+    env('JWT_SECRET'),
+    {
+      expireIn: '5m',
+    },
+  );
+
+  await sendEmail({
+    from: env(SMTP.SMTP_FROM),
+    to: email,
+    subject: 'Reset your password',
+    html: `<p>
+        Click <a href="${resetToken}"></a> to reset your password!
+      </p>`,
+  });
+};
