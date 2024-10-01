@@ -133,6 +133,8 @@ export const requestResetToken = async (email) => {
     link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken},`,
   });
 
+  console.log(html);
+
   await sendEmail({
     from: env(SMTP.SMTP_FROM),
     to: email,
@@ -145,7 +147,7 @@ export const resetPassword = async (payload) => {
   let entries;
 
   try {
-    entries.jwt.verify(payload.token, env('JWT_SECRET'));
+    entries = jwt.verify(payload.token, env('JWT_SECRET'));
   } catch (error) {
     if (error instanceof Error) {
       throw createHttpError(401, error.message);

@@ -4,6 +4,10 @@ import parsePaginationParams from '../utils/parsePaginationParams.js';
 import parseSortParams from '../utils/parseSortParams.js';
 import { sortFields } from '../db/models/Contact.js';
 import parseContactsFilterParamas from '../utils/filters/parseContactsFilterParams.js';
+import saveFileToCloudinary from '../utils/saveFileToCloudinary.js';
+import { env } from '../utils/env.js';
+
+const enableCloudinary = env('ENABLE_CLOUDINARY');
 
 export const getAllContactsController = async (reg, res) => {
   const { perPage, page } = parsePaginationParams(reg.query);
@@ -45,6 +49,15 @@ export const getContactByIdController = async (reg, res) => {
 };
 
 export const postNewContactController = async (reg, res) => {
+  let poster;
+
+  if (reg.file) {
+    if (enableCloudinary === 'true') {
+      poster = await saveFileToCloudinary(reg.file, 'posters');
+    } else {
+      await saveFileToUploadDir(reg.file);
+    }
+  }
   const { _id: userId } = reg.user;
 
   const data = await contactServises.postNewContact({ ...reg.body, userId });

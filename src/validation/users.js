@@ -17,4 +17,5 @@ export const requestResetEmailShema = Joi.object({
 
 export const resetPasswordShema = Joi.object({
   password: Joi.string().required(),
+  token: Joi.string().required(),
 });
