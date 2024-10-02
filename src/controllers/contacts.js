@@ -35,7 +35,6 @@ export const getContactByIdController = async (reg, res) => {
   const { id } = reg.params;
   const { _id: userId } = reg.user;
   const data = await contactServises.getContact({ id, userId });
-
   if (!data) {
     return res.status(404).json({
       message: `Contact with id=${id} not found`,
@@ -49,23 +48,25 @@ export const getContactByIdController = async (reg, res) => {
 };
 
 export const postNewContactController = async (reg, res) => {
-  let poster;
+  console.log(reg.body);
+  console.log(reg.file);
+  // let poster;
 
-  if (reg.file) {
-    if (enableCloudinary === 'true') {
-      poster = await saveFileToCloudinary(reg.file, 'posters');
-    } else {
-      await saveFileToUploadDir(reg.file);
-    }
-  }
-  const { _id: userId } = reg.user;
+  // if (reg.file) {
+  //   if (enableCloudinary === 'true') {
+  //     poster = await saveFileToCloudinary(reg.file, 'posters');
+  //   } else {
+  //     await saveFileToUploadDir(reg.file);
+  //   }
+  // }
+  // const { _id: userId } = reg.user;
 
-  const data = await contactServises.postNewContact({ ...reg.body, userId });
-  res.status(201).json({
-    status: 201,
-    message: 'Successfully created a contact!',
-    data,
-  });
+  // const data = await contactServises.postNewContact({ ...reg.body, userId });
+  // res.status(201).json({
+  //   status: 201,
+  //   message: 'Successfully created a contact!',
+  //   data,
+  // });
 };
 
 export const patchContactByIdController = async (reg, res, next) => {
