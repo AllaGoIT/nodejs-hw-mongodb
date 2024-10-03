@@ -118,6 +118,8 @@ export const requestResetToken = async (email) => {
     },
   );
 
+  console.log(resetToken);
+
   const resetPasswordTemplatePath = path.join(
     TEMPLATES_DIR,
     'reset-password-email.html',
