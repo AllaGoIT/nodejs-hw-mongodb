@@ -55,7 +55,7 @@ export const postNewContactController = async (reg, res) => {
 
   if (reg.file) {
     if (enableCloudinary === 'true') {
-      photo = await saveFileToCloudinary(reg.file, 'photo');
+      photo = await saveFileToCloudinary(reg.file, 'photos');
     } else {
       photo = await saveFileToUploadDir(reg.file);
     }
