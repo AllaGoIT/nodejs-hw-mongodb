@@ -2,7 +2,7 @@ import { v2 as cloudinary } from 'cloudinary';
 import { env } from './env.js';
 import * as fs from 'node:fs/promises';
 
-const cloud_name = env('CLOUDINARY_CLOUD_NAME');
+const cloud_name = env(`${CLOUDINARY_CLOUD_NAME}`);
 const api_key = env('CLOUDINARY_API_KEY');
 const api_secret = env('CLOUDINARY_API_SECRET');
 
