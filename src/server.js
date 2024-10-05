@@ -13,8 +13,8 @@ export const setupServer = () => {
   app.use(loggerHandler);
   app.use(cors());
   app.use(express.json());
-  app.use(express.static('upload'));
   app.use(cookieParser());
+  app.use(express.static('upload'));
   app.use('/contacts', router);
   app.use('/auth', authRouter);
 
