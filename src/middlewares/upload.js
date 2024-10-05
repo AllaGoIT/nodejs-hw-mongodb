@@ -2,7 +2,7 @@ import multer from 'multer';
 import { TEMP_UPLOAD_DIR } from '../constants/index.js';
 import createHttpError from 'http-errors';
 
-const storege = multer.diskStorage({
+const storage = multer.diskStorage({
   //   destination: (reg, file, callback) => {
   //     callback(null, TEMP_UPLOAD_DIR);
   //   }, first method
@@ -28,7 +28,7 @@ const fileFilter = (reg, file, callback) => {
 };
 
 const upload = multer({
-  storege,
+  storage,
   limits,
   fileFilter,
 });
