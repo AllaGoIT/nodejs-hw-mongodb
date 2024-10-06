@@ -17,7 +17,7 @@ servers:
 paths:
   /contacts/{id}:
     get:
-      $ref: ../swagger/paths/contacts/{id}/get.yaml
+      $ref: ../docs/swagger/paths/contacts/{id}/get.yaml
 components:
   securitySchemes:
     bearerAuth:
