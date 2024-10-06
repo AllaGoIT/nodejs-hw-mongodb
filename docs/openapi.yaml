@@ -7,15 +7,15 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   description: This is a documentation of contacts app
 tags:
- - name: Contacts
-  description: Operations about Contacts.
+  - name: Contacts
+    description: Operations about contacts.
   - name: Auth
-  description: Auth operations. 
+    description: Auth operations.
 servers:
   - url: http://localhost:3000
   - url: https://nodejs-hw-mongodb-gb2r.onrender.com
 paths:
-   /contacts/{id}:
+  /contacts/{id}:
     get:
       $ref: ../swagger/paths/contacts/{id}/get.yaml
 components:
