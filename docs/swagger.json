@@ -112,7 +112,7 @@
                     "data": {
                       "type": "object",
                       "required": [
-                        "data",
+                        "contacts",
                         "page",
                         "perPage",
                         "totalItems",
@@ -121,7 +121,7 @@
                         "hasPreviousPage"
                       ],
                       "properties": {
-                        "data": {
+                        "contacts": {
                           "type": "array",
                           "items": {
                             "$ref": "#/components/schemas/contact"
@@ -456,8 +456,7 @@
         "required": [
           "name",
           "phoneNumber",
-          "ContactType",
-          "userId"
+          "ContactType"
         ],
         "properties": {
           "name": {
@@ -478,11 +477,6 @@
               "home",
               "personel"
             ]
-          },
-          "userId": {
-            "description": "User`s id",
-            "type": "string",
-            "example": "65e4decdd286b30065d54af9"
           },
           "email": {
             "description": "User`s email",

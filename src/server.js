@@ -16,9 +16,9 @@ export const setupServer = () => {
   app.use(express.json());
   app.use(cookieParser());
   app.use(express.static('upload'));
+  app.use('/api-docs', swaggerDocs());
   app.use('/contacts', router);
   app.use('/auth', authRouter);
-  app.use('api/docs', swaggerDocs());
 
   //routes
 

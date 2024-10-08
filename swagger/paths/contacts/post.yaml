@@ -13,6 +13,8 @@ requestBody:
         required:
           - name
           - phoneNumber
+          - email
+          - isFavorite
           - contactType
         properties:
           name:
@@ -23,10 +25,18 @@ requestBody:
             description: "User's phone"
             type: string
             example: '+380975463728'
+          email:
+            description: "User's email"
+            type: string
+            example: 'dfksfh@gmail.com'
+          isFavorite:
+            description: 'Favorite contact'
+            type: boolean
+            example: true
           contactType:
             description: 'PersonalData'
             type: string
-            enum: ['personal', 'home', 'work']
+            enum: ['work', 'home', 'personal']
 
 responses:
   '201':
@@ -55,3 +65,8 @@ responses:
     $ref: '../../components/responses/401.yaml'
   '500':
     $ref: '../../components/responses/500.yaml'
+# name: Joi.string().min(3).max(20),
+#   phoneNumber: Joi.string().min(3).max(20),
+#   email: Joi.string().min(3).max(20),
+#   isFavourite: Joi.boolean(),
+#   contactType: Joi.string()
