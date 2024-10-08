@@ -186,6 +186,8 @@
                 "required": [
                   "name",
                   "phoneNumber",
+                  "email",
+                  "isFavorite",
                   "contactType"
                 ],
                 "properties": {
@@ -199,13 +201,23 @@
                     "type": "string",
                     "example": "+380975463728"
                   },
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "dfksfh@gmail.com"
+                  },
+                  "isFavorite": {
+                    "description": "Favorite contact",
+                    "type": "boolean",
+                    "example": true
+                  },
                   "contactType": {
                     "description": "PersonalData",
                     "type": "string",
                     "enum": [
-                      "personal",
+                      "work",
                       "home",
-                      "work"
+                      "personal"
                     ]
                   }
                 }
@@ -337,16 +349,16 @@
                   },
                   "isFavourite": {
                     "description": "User`s likes",
-                    "type": "string",
-                    "example": "true"
+                    "type": "boolean",
+                    "example": true
                   },
                   "contactType": {
                     "description": "PersonalData",
                     "type": "string",
                     "enum": [
-                      "personal",
+                      "work",
                       "home",
-                      "work"
+                      "personal"
                     ]
                   },
                   "photo": {
@@ -475,7 +487,7 @@
             "enum": [
               "work",
               "home",
-              "personel"
+              "personal"
             ]
           },
           "email": {
@@ -485,8 +497,13 @@
           },
           "isFavorite": {
             "description": "Favorite contact",
-            "type": "boolean",
-            "example": false
+            "type": "string",
+            "example": "false"
+          },
+          "userId": {
+            "description": "User's id",
+            "type": "string",
+            "example": "65e4decdd286b30065d54af9"
           },
           "photo": {
             "description": "Link to user's photo",
