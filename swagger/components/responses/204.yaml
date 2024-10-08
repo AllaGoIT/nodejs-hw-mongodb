@@ -1,0 +1,19 @@
+description: 'Delete ContactType by id'
+content:
+  application/json:
+    schema:
+      type: object
+      required:
+        - status
+        - message
+        - data
+      properties:
+        status:
+          type: integer
+          example: 204
+        message:
+          type: string
+          example: Successfully delete contact with 65e4decdd286b30065d54af9 id!
+        data:
+          type: object
+          $ref: ../shemas/contact.yaml
