@@ -57,7 +57,7 @@ responses:
             data:
               type: object
               required:
-                - data
+                - contacts
                 - page
                 - perPage
                 - totalItems
@@ -65,7 +65,7 @@ responses:
                 - hasNextPage
                 - hasPreviousPage
               properties:
-                data:
+                contacts:
                   type: array
                   items:
                     $ref: ../../components/shemas/contact.yaml
@@ -89,5 +89,5 @@ responses:
                   example: true
   '401':
     $ref: '../../components/responses/401.yaml'
-  "500":
+  '500':
     $ref: '../../components/responses/500.yaml'

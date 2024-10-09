@@ -13,6 +13,8 @@ requestBody:
         required:
           - name
           - phoneNumber
+          - email
+          - isFavorite
           - contactType
         properties:
           name:
@@ -23,10 +25,18 @@ requestBody:
             description: "User's phone"
             type: string
             example: '+380975463728'
+          email:
+            description: "User's email"
+            type: string
+            example: 'dfksfh@gmail.com'
+          isFavorite:
+            description: 'Favorite contact'
+            type: boolean
+            example: true
           contactType:
             description: 'PersonalData'
             type: string
-            enum: ['personal', 'home', 'work']
+            enum: ['work', 'home', 'personal']
 
 responses:
   '201':

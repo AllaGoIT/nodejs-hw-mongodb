@@ -1,1 +1,1 @@
-export const personelData = ['work', 'home', 'personel'];
+export const personelData = ['work', 'home', 'personal'];

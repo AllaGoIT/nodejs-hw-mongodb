@@ -32,12 +32,12 @@ requestBody:
             example: 'gdhsty@gmail.com'
           isFavourite:
             description: 'User`s likes'
-            type: string
-            example: 'true'
+            type: boolean
+            example: true
           contactType:
             description: 'PersonalData'
             type: string
-            enum: ['personal', 'home', 'work']
+            enum: ['work', 'home', 'personal']
           photo:
             description: "Users's photo"
             type: string
